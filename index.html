@@ -13,34 +13,54 @@
      VARIABLES & RESET
   ═══════════════════════════════════════════ */
  :root {
-    /* Fonds réhaussés (moins noirs, plus gris-bleu foncé) */
     --base:       #151b23; 
     --surf-1:     #1a222e;
     --surf-2:     #222d3e;
     --surf-3:     #2b3c52;
     --border:     #2b3c52;
     --border-hi:  #384f6b;
-
-    /* Textes légèrement éclaircis pour garder un bon contraste avec le nouveau fond */
     --text-main:  #f0f6fa;
     --text-sec:   #8ba7bc;
     --text-dim:   #4d667c;
-
-    /* Accents d'origine (inchangés pour garder votre identité) */
     --accent-b:   #4a7fa5;
     --accent-bhi: #89c4e1;
     --accent-o:   #e06b1f;
     --accent-ohi: #f0884a;
 
-    /* Typographie et variables d'origine (inchangées) */
     --font-cond:  'Barlow Condensed', sans-serif;
     --font-body:  'Barlow', sans-serif;
 
-    /* Grille très légèrement plus visible pour ne pas disparaître sur le fond plus clair */
     --grid-color: rgba(78, 127, 165, 0.06);
     --radius:     4px;
     --transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--base);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
   /* ═══════════════════════════════════════════
      NAVBAR
   ═══════════════════════════════════════════ */
