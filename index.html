@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Maxime Haon · BUT GMP CPD · IUT Alençon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ═══════════════════════════════════════════
+     VARIABLES & RESET
+  ═══════════════════════════════════════════ */
+  :root {
+    --base:       #0d1117;
+    --surf-1:     #131b24;
+    --surf-2:     #182030;
+    --surf-3:     #1e2d40;
+    --border:     #1e2d40;
+    --border-hi:  #2a3f58;
+    --text-main:  #e8f1f8;
+    --text-sec:   #7a95aa;
+    --text-dim:   #3d5468;
+    --accent-b:   #4a7fa5;
+    --accent-bhi: #89c4e1;
+    --accent-o:   #e06b1f;
+    --accent-ohi: #f0884a;
+
+    --font-cond:  'Barlow Condensed', sans-serif;
+    --font-body:  'Barlow', sans-serif;
+
+    --grid-color: rgba(78, 127, 165, 0.04);
+    --radius:     4px;
+    --transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--base);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ═══════════════════════════════════════════
+     NAVBAR
+  ═══════════════════════════════════════════ */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    background: rgba(13, 17, 23, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-brand {
+    font-family: var(--font-cond);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-main);
+  }
+
+  .nav-brand span { color: var(--accent-o); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-cond);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-sec);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent-bhi); }
+
+  /* ═══════════════════════════════════════════
+     SCROLL ANIMATION
+  ═══════════════════════════════════════════ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--transition), transform var(--transition);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ═══════════════════════════════════════════
+     LAYOUT UTILS
+  ═══════════════════════════════════════════ */
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  section { padding: 100px 0; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-cond);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent-o);
+    margin-bottom: 16px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent-o);
+  }
+
+  h1, h2, h3 { font-family: var(--font-cond); font-weight: 700; }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--text-sec);
+    font-weight: 300;
+    margin-bottom: 64px;
+  }
+
+  /* ═══════════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════════ */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Diagonal accent */
+  #hero::after {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -100px;
+    width: 600px;
+    height: 600px;
+    border: 1px solid var(--border);
+    transform: rotate(25deg);
+    opacity: 0.3;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 64px;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-cond);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent-o);
+    margin-bottom: 24px;
+  }
+
+  .hero-name {
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: 32px;
+  }
+
+  .hero-name em {
+    font-style: normal;
+    color: var(--accent-bhi);
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--text-sec);
+    max-width: 520px;
+    margin-bottom: 40px;
+    line-height: 1.9;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border: 1px solid var(--border-hi);
+    border-radius: var(--radius);
+    font-family: var(--font-cond);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-sec);
+    background: var(--surf-1);
+  }
+
+  .badge.accent { border-color: var(--accent-o); color: var(--accent-o); }
+  .badge.blue { border-color: var(--accent-b); color: var(--accent-bhi); }
+
+  .hero-stat-block {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-end;
+  }
+
+  .hero-stat {
+    text-align: right;
+  }
+
+  .hero-stat .num {
+    font-family: var(--font-cond);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 800;
+    color: var(--text-dim);
+    line-height: 1;
+  }
+
+  .hero-stat .lbl {
+    font-family: var(--font-cond);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ═══════════════════════════════════════════
+     RADAR / AUTOEVAL
+  ═══════════════════════════════════════════ */
+  #autoeval {
+    background: var(--surf-1);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .autoeval-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .radar-wrap {
+    position: relative;
+  }
+
+  canvas#radar {
+    width: 100%;
+    max-width: 420px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .legend-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .legend-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .legend-name {
+    font-family: var(--font-cond);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .legend-bars {
+    display: flex;
+    gap: 4px;
+  }
+
+  .legend-bar {
+    width: 28px;
+    height: 6px;
+    border-radius: 2px;
+    background: var(--border);
+  }
+
+  .legend-bar.filled { background: var(--accent-b); }
+  .legend-bar.filled-o { background: var(--accent-o); }
+
+  .situation-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .sit-tab {
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: var(--font-cond);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-sec);
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.2s;
+  }
+
+  .sit-tab.active, .sit-tab:hover {
+    border-color: var(--accent-b);
+    color: var(--accent-bhi);
+    background: rgba(74, 127, 165, 0.08);
+  }
+
+  /* ═══════════════════════════════════════════
+     SITUATION SECTIONS
+  ═══════════════════════════════════════════ */
+  .situation-block {
+    border-left: 3px solid var(--accent-b);
+    padding-left: 40px;
+    margin-bottom: 80px;
+    position: relative;
+  }
+
+  .situation-block.indus { border-left-color: var(--accent-o); }
+  .situation-block.orga { border-left-color: #6a9e6a; }
+
+  .situation-num {
+    font-family: var(--font-cond);
+    font-size: 6rem;
+    font-weight: 800;
+    color: var(--text-dim);
+    line-height: 1;
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    opacity: 0.4;
+    user-select: none;
+  }
+
+  .situation-header {
+    margin-bottom: 40px;
+  }
+
+  .situation-type {
+    font-family: var(--font-cond);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent-o);
+    margin-bottom: 8px;
+  }
+
+  .situation-block.etudes .situation-type { color: var(--accent-bhi); }
+  .situation-block.orga .situation-type { color: #6a9e6a; }
+
+  .situation-title {
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* Competence card */
+  .comp-card {
+    background: var(--surf-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 20px;
+    transition: border-color 0.2s;
+  }
+
+  .comp-card:hover { border-color: var(--border-hi); }
+
+  .comp-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 16px;
+  }
+
+  .comp-num {
+    font-family: var(--font-cond);
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text-dim);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .comp-title-wrap { flex: 1; }
+
+  .comp-label {
+    font-family: var(--font-cond);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-sec);
+    margin-bottom: 4px;
+  }
+
+  .comp-name {
+    font-family: var(--font-cond);
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+
+  .comp-sub {
+    font-size: 0.85rem;
+    color: var(--text-sec);
+    font-weight: 300;
+  }
+
+  .comp-level {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .level-dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .level-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid var(--border-hi);
+  }
+
+  .level-dot.filled { background: var(--accent-b); border-color: var(--accent-b); }
+  .level-dot.filled-o { background: var(--accent-o); border-color: var(--accent-o); }
+
+  .level-text {
+    font-family: var(--font-cond);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-sec);
+  }
+
+  /* Composantes essentielles */
+  .comp-ess {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .ess-tag {
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-family: var(--font-cond);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+  }
+
+  /* Divider */
+  .comp-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+
+  /* Preuve block */
+  .preuve-block {
+    margin-bottom: 16px;
+  }
+
+  .preuve-title {
+    font-family: var(--font-cond);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-o);
+    margin-bottom: 8px;
+  }
+
+  .preuve-text {
+    font-size: 0.9rem;
+    color: var(--text-sec);
+    line-height: 1.8;
+  }
+
+  /* Callout — prise de recul */
+  .callout {
+    background: var(--surf-2);
+    border-left: 3px solid var(--accent-o);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-top: 20px;
+  }
+
+  .callout-label {
+    font-family: var(--font-cond);
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent-o);
+    margin-bottom: 8px;
+  }
+
+  .callout p {
+    font-size: 0.875rem;
+    color: var(--text-main);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .callout strong {
+    color: var(--accent-bhi);
+    font-weight: 500;
+  }
+
+  /* ═══════════════════════════════════════════
+     TIMELINE ALTERNANCE
+  ═══════════════════════════════════════════ */
+  #context {
+    border-top: 1px solid var(--border);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .tl-item {
+    position: relative;
+    padding: 16px 0 16px 32px;
+  }
+
+  .tl-dot {
+    position: absolute;
+    left: -5px;
+    top: 22px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent-b);
+    border: 2px solid var(--base);
+  }
+
+  .tl-item.current .tl-dot { background: var(--accent-o); }
+
+  .tl-period {
+    font-family: var(--font-cond);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+  }
+
+  .tl-label {
+    font-family: var(--font-cond);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-main);
+  }
+
+  .context-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .info-block {
+    margin-bottom: 32px;
+  }
+
+  .info-label {
+    font-family: var(--font-cond);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  .info-value {
+    font-size: 1rem;
+    color: var(--text-main);
+    font-weight: 300;
+  }
+
+  .info-value strong {
+    font-weight: 500;
+    color: var(--accent-bhi);
+  }
+
+  /* ═══════════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════════ */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    font-family: var(--font-cond);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .footer-info {
+    font-family: var(--font-cond);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-align: right;
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════════ */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .container { padding: 0 24px; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-stat-block { flex-direction: row; align-items: flex-start; }
+    .autoeval-grid { grid-template-columns: 1fr; }
+    .context-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+    .footer-info { text-align: center; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--base); }
+  ::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 2px; }
+
+  /* Print hint */
+  @media print {
+    nav, .reveal { opacity: 1; transform: none; }
+    body::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav>
+  <div class="nav-brand">HAON <span>·</span> Portfolio BUT3</div>
+  <ul class="nav-links">
+    <li><a href="#autoeval">Autoévaluation</a></li>
+    <li><a href="#etudes">Études</a></li>
+    <li><a href="#industrialisation">Industrialisation</a></li>
+    <li><a href="#organisation">Organisation</a></li>
+    <li><a href="#context">Contexte</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <p class="hero-eyebrow reveal">Portfolio de compétences · Soutenance de fin de parcours BUT3</p>
+        <h1 class="hero-name reveal reveal-delay-1">
+          Maxime<br><em>Haon</em>
+        </h1>
+        <p class="hero-desc reveal reveal-delay-2">
+          Technicien Métrologue en alternance chez <strong style="color:var(--text-main)">CGR International</strong>, Igé.<br>
+          BUT Génie Mécanique et Productique · Parcours <strong style="color:var(--text-main)">Conception et Production Durables</strong><br>
+          IUT d'Alençon · 2023 – 2026
+        </p>
+        <div class="hero-meta reveal reveal-delay-3">
+          <span class="badge accent">BUT3 · CPD</span>
+          <span class="badge blue">Métrologie industrielle</span>
+          <span class="badge">IUT Alençon</span>
+          <span class="badge">Alternance</span>
+        </div>
+      </div>
+      <div class="hero-stat-block reveal reveal-delay-4">
+        <div class="hero-stat">
+          <div class="num">600+</div>
+          <div class="lbl">Instruments gérés</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">5</div>
+          <div class="lbl">Compétences BUT</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">3</div>
+          <div class="lbl">Situations pro</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ AUTOÉVALUATION ═══════════════ -->
+<section id="autoeval">
+  <div class="container">
+    <p class="section-label reveal">Ouverture · Bilan des compétences</p>
+    <h2 class="section-title reveal reveal-delay-1">Autoévaluation</h2>
+    <p class="section-sub reveal reveal-delay-2">Diagramme radar fourni par l'IUT · Notes par situation professionnelle</p>
+
+    <div class="autoeval-grid">
+      <div class="radar-wrap reveal reveal-delay-2">
+        <div class="situation-tabs">
+          <button class="sit-tab active" onclick="switchRadar('etudes', this)">Études</button>
+          <button class="sit-tab" onclick="switchRadar('indus', this)">Industrialisation</button>
+          <button class="sit-tab" onclick="switchRadar('orga', this)">Organisation</button>
+          <button class="sit-tab" onclick="switchRadar('moy', this)">Moyenne</button>
+        </div>
+        <canvas id="radar" width="420" height="420"></canvas>
+      </div>
+
+      <div class="legend-list reveal reveal-delay-3">
+        <p style="font-size:0.8rem;color:var(--text-sec);margin-bottom:16px;line-height:1.7;">
+          L'autoévaluation est présentée sur une échelle de <strong style="color:var(--text-main)">1 à 4</strong> :
+          non acquis · en voie · partiellement · acquis.
+        </p>
+
+        <div class="legend-item">
+          <div class="legend-dot" style="background:var(--accent-bhi)"></div>
+          <span class="legend-name" style="font-size:0.8rem;">Spécifier</span>
+          <div class="legend-bars" id="bars-specifier"></div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:var(--accent-o)"></div>
+          <span class="legend-name" style="font-size:0.8rem;">Développer</span>
+          <div class="legend-bars" id="bars-developper"></div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#e0b01f"></div>
+          <span class="legend-name" style="font-size:0.8rem;">Réaliser</span>
+          <div class="legend-bars" id="bars-realiser"></div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#6a9e6a"></div>
+          <span class="legend-name" style="font-size:0.8rem;">Exploiter</span>
+          <div class="legend-bars" id="bars-exploiter"></div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#9e6aaa"></div>
+          <span class="legend-name" style="font-size:0.8rem;">Innover / Durabiliser</span>
+          <div class="legend-bars" id="bars-innover"></div>
+        </div>
+
+        <div class="callout" style="margin-top:24px;">
+          <div class="callout-label">Note de lecture</div>
+          <p>La situation <strong>Industrialisation</strong> révèle la marge de progression la plus significative, notamment sur RÉALISER (1/4). Elle illustre mon point de départ : <strong>aucune fiche YIS n'existait</strong>, j'ai tout créé de zéro.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SITUATION 1 : ÉTUDES ═══════════════ -->
+<section id="etudes">
+  <div class="container">
+    <p class="section-label reveal">Situation professionnelle 01</p>
+    <h2 class="section-title reveal reveal-delay-1">Études</h2>
+    <p class="section-sub reveal reveal-delay-2">Bureau d'études · Conception · Analyse du besoin</p>
+
+    <div class="situation-block etudes">
+
+      <!-- COMPÉTENCE SPÉCIFIER -->
+      <div class="comp-card reveal reveal-delay-1">
+        <div class="comp-header">
+          <div class="comp-num">01</div>
+          <div class="comp-title-wrap">
+            <div class="comp-label">Compétence · Situation Études</div>
+            <div class="comp-name">Spécifier</div>
+            <div class="comp-sub">Spécifier les exigences technico-économiques industrielles</div>
+          </div>
+          <div class="comp-level">
+            <div class="level-dots">
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot"></div>
+            </div>
+            <div class="level-text">Partiellement acquis · 3/4</div>
+          </div>
+        </div>
+
+        <div class="comp-ess">
+          <span class="ess-tag">Répondre au besoin client</span>
+          <span class="ess-tag">Déterminer les paramètres caractéristiques</span>
+          <span class="ess-tag">Traduire en exigences techniques</span>
+          <span class="ess-tag">Mettre en œuvre une méthodologie</span>
+        </div>
+
+        <div class="comp-divider"></div>
+
+        <div class="preuve-block">
+          <div class="preuve-title">🏭 Étude de cas industrielle — CGR International</div>
+          <p class="preuve-text">
+            Dans le cadre de mes missions de Technicien Métrologue, je suis régulièrement confronté au choix de l'instrument de mesure adapté à chaque pièce à contrôler. Cette décision n'est pas triviale : elle nécessite d'analyser la <strong style="color:var(--text-main)">tolérance dimensionnelle exigée</strong> par le plan, puis de sélectionner l'instrument dont l'incertitude de mesure est compatible avec cette tolérance — selon la règle du dixième ou du cinquième selon les exigences qualité du client.
+            <br><br>
+            Concrètement, un instrument dont l'incertitude représente plus de 20 % de l'IT est exclu du choix. Ce raisonnement m'a conduit à maîtriser les fiches d'incertitude des appareils du parc YIS et à les mobiliser dans mes choix quotidiens.
+          </p>
+        </div>
+
+        <div class="callout">
+          <div class="callout-label">📐 Prise de recul — Réflexion sur l'acquisition</div>
+          <p>
+            En début d'alternance, je choisissais un instrument <strong>par habitude ou par disponibilité</strong>, sans raisonner sur la tolérance demandée. J'ai progressivement compris que la sélection d'un instrument est elle-même un acte technique structuré : il faut lire la tolérance, connaître l'incertitude de l'instrument, et <strong>vérifier leur compatibilité</strong> avant de mesurer.
+            <br><br>
+            À l'avenir, je souhaite formaliser cette démarche dans une aide à la décision intégrée directement dans YIS pour que tout technicien puisse l'appliquer, même sans expérience métrologique avancée.
+          </p>
+        </div>
+      </div>
+
+      <!-- COMPÉTENCE DÉVELOPPER -->
+      <div class="comp-card reveal reveal-delay-2">
+        <div class="comp-header">
+          <div class="comp-num">02</div>
+          <div class="comp-title-wrap">
+            <div class="comp-label">Compétence · Situation Études</div>
+            <div class="comp-name">Développer</div>
+            <div class="comp-sub">Déterminer la solution conceptuelle</div>
+          </div>
+          <div class="comp-level">
+            <div class="level-dots">
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot"></div>
+            </div>
+            <div class="level-text">Partiellement acquis · 3/4</div>
+          </div>
+        </div>
+
+        <div class="comp-ess">
+          <span class="ess-tag">Respecter un cahier des charges</span>
+          <span class="ess-tag">Identifier des solutions viables</span>
+          <span class="ess-tag">Valider et classer les solutions</span>
+          <span class="ess-tag">Démarche collaborative</span>
+          <span class="ess-tag">Outils pertinents</span>
+        </div>
+
+        <div class="comp-divider"></div>
+
+        <div class="preuve-block">
+          <div class="preuve-title">🎓 Étude de cas académique — Projet Maintenance (IUT Alençon)</div>
+          <p class="preuve-text">
+            En collaboration avec SOMMIER et BARRE (IUT Alençon / Lycée Alain), nous avons conçu un <strong style="color:var(--text-main)">banc de test automatisé</strong> destiné à maintenir opérationnelles deux pompes de remplacement (KSB Etanorm & Simson MUH304) pendant leur stockage, via un cycle quotidien de 5 minutes.
+            <br><br>
+            Le projet a nécessité de respecter un cahier des charges strict : dimensionnement d'un châssis aluminium 40×40 mm (1200×800×1000 mm), choix de composants Schneider, cuve inox 316L, bac de rétention PE, conformité ergonomique. J'ai développé une <strong style="color:var(--text-main)">macro VBA SolidWorks 2025</strong> (Late Binding) pour générer automatiquement le châssis paramétrique — preuve de ma capacité à formaliser une solution avec des outils numériques pertinents.
+          </p>
+        </div>
+
+        <div class="callout">
+          <div class="callout-label">📐 Prise de recul — Réflexion sur l'acquisition</div>
+          <p>
+            La principale difficulté rencontrée était le respect des <strong>bonnes pratiques de maintenance</strong> dans la conception même du banc : accessibilité des composants, facilité d'intervention, sécurité électrique. Ces contraintes terrain ne sont pas dans les cours théoriques — elles s'acquièrent par confrontation avec les exigences réelles.
+            <br><br>
+            Si c'était à refaire, j'intégrerais plus tôt une revue de conception avec un technicien de maintenance expérimenté pour <strong>valider les choix d'accessibilité</strong> avant de modéliser, et non après.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SITUATION 2 : INDUSTRIALISATION ═══════════════ -->
+<section id="industrialisation" style="background: var(--surf-1); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <p class="section-label reveal">Situation professionnelle 02</p>
+    <h2 class="section-title reveal reveal-delay-1">Industrialisation</h2>
+    <p class="section-sub reveal reveal-delay-2">Production · Métrologie · Qualité · Systèmes documentaires</p>
+
+    <div class="situation-block indus">
+
+      <!-- COMPÉTENCE RÉALISER -->
+      <div class="comp-card reveal reveal-delay-1">
+        <div class="comp-header">
+          <div class="comp-num">03</div>
+          <div class="comp-title-wrap">
+            <div class="comp-label">Compétence · Situation Industrialisation</div>
+            <div class="comp-name">Réaliser</div>
+            <div class="comp-sub">Concrétiser la solution technique retenue</div>
+          </div>
+          <div class="comp-level">
+            <div class="level-dots">
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot"></div>
+            </div>
+            <div class="level-text">Partiellement acquis · 3/4</div>
+          </div>
+        </div>
+
+        <div class="comp-ess">
+          <span class="ess-tag">Définir une solution fonctionnelle</span>
+          <span class="ess-tag">Élaborer des documents métiers</span>
+          <span class="ess-tag">Respecter les normes</span>
+          <span class="ess-tag">Contraintes technico-économiques</span>
+        </div>
+
+        <div class="comp-divider"></div>
+
+        <div class="preuve-block">
+          <div class="preuve-title">🏭 Étude de cas industrielle — Création du système documentaire YIS, CGR International</div>
+          <p class="preuve-text">
+            À mon arrivée en alternance, le parc d'instruments de CGR International ne disposait d'<strong style="color:var(--text-main)">aucune fiche de vie ni fiche d'étalonnage</strong> pour les balances compteuses — pourtant instruments critiques dans la démarche qualité de l'entreprise. J'ai conçu et déployé l'ensemble du système documentaire de zéro dans le logiciel YIS.
+            <br><br>
+            Cela a impliqué de définir les champs pertinents (référence, localisation, date de mise en service, fréquence de requalification, incertitude, raccordement), de rédiger les procédures d'étalonnage associées, et de réaliser les premières requalifications annuelles — <strong style="color:var(--text-main)">parfois sans aucun historique disponible</strong> de l'année précédente, ce qui nécessitait de partir d'une feuille entièrement blanche.
+          </p>
+        </div>
+
+        <div class="callout">
+          <div class="callout-label">📐 Prise de recul — Réflexion sur l'acquisition</div>
+          <p>
+            Partir de zéro m'a obligé à <strong>comprendre chaque champ documentaire en profondeur</strong> plutôt que de le remplir mécaniquement. La rigueur documentaire n'est pas une contrainte administrative : c'est la garantie que le prochain technicien — ou moi-même dans un an — retrouve exactement l'état de l'instrument et sa traçabilité.
+            <br><br>
+            Cette expérience m'a appris que <strong>la réalisation industrielle, c'est d'abord construire une mémoire fiable du système</strong>. Ce principe est transposable à n'importe quel contexte de production.
+          </p>
+        </div>
+      </div>
+
+      <!-- COMPÉTENCE EXPLOITER -->
+      <div class="comp-card reveal reveal-delay-2">
+        <div class="comp-header">
+          <div class="comp-num">04</div>
+          <div class="comp-title-wrap">
+            <div class="comp-label">Compétence · Situation Industrialisation</div>
+            <div class="comp-name">Exploiter</div>
+            <div class="comp-sub">Gérer le cycle de vie du produit et du système de production</div>
+          </div>
+          <div class="comp-level">
+            <div class="level-dots">
+              <div class="level-dot filled-o"></div>
+              <div class="level-dot filled-o"></div>
+              <div class="level-dot filled-o"></div>
+              <div class="level-dot filled-o"></div>
+            </div>
+            <div class="level-text">Acquis · 4/4</div>
+          </div>
+        </div>
+
+        <div class="comp-ess">
+          <span class="ess-tag">Gestion et traçabilité des flux</span>
+          <span class="ess-tag">Données → consignes de pilotage</span>
+          <span class="ess-tag">Amélioration continue</span>
+          <span class="ess-tag">Qualité optimale</span>
+          <span class="ess-tag">Procédures et standards</span>
+        </div>
+
+        <div class="comp-divider"></div>
+
+        <div class="preuve-block">
+          <div class="preuve-title">🏭 Étude de cas industrielle — Gestion du parc métrologique, CGR International</div>
+          <p class="preuve-text">
+            Je gère un parc de <strong style="color:var(--text-main)">plus de 600 instruments de mesure</strong> via le logiciel YIS : planification des requalifications annuelles, suivi de la traçabilité des étalonnages, analyse des indices de capabilité Cpk (seuil ≥ 1,67), et validation des dossiers PPAP.
+            <br><br>
+            Ce rôle m'a confronté à un cas concret révélateur : une <strong style="color:var(--text-main)">bague de contrôle identifiée non conforme depuis plus d'un an</strong> continuait à être utilisée en production. En croisant les données de traçabilité YIS et les résultats d'étalonnage, j'ai pu documenter la non-conformité, la remonter au responsable qualité et déclencher son retrait immédiat — évitant potentiellement des lots de pièces non-conformes livrées au client.
+          </p>
+        </div>
+
+        <div class="callout">
+          <div class="callout-label">📐 Prise de recul — Réflexion sur l'acquisition</div>
+          <p>
+            Ce cas de la bague NC m'a montré que <strong>la valeur de la métrologie n'est pas dans la mesure elle-même, mais dans ce qu'on en fait</strong>. Gérer un parc d'instruments sans exploiter les données qu'il génère, c'est gérer un inventaire, pas un système qualité.
+            <br><br>
+            À l'avenir, je veux développer des <strong>alertes automatiques dans YIS</strong> pour signaler proactivement les instruments dépassant leur date de requalification, afin qu'aucune dérive ne passe inaperçue.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SITUATION 3 : ORGANISATION ═══════════════ -->
+<section id="organisation">
+  <div class="container">
+    <p class="section-label reveal">Situation professionnelle 03</p>
+    <h2 class="section-title reveal reveal-delay-1">Organisation</h2>
+    <p class="section-sub reveal reveal-delay-2">Gestion · Stratégie · Développement durable · Amélioration continue</p>
+
+    <div class="situation-block orga">
+
+      <!-- COMPÉTENCE INNOVER / DURABILISER -->
+      <div class="comp-card reveal reveal-delay-1">
+        <div class="comp-header">
+          <div class="comp-num">05</div>
+          <div class="comp-title-wrap">
+            <div class="comp-label">Compétence · Situation Organisation</div>
+            <div class="comp-name">Innover · Durabiliser</div>
+            <div class="comp-sub">Intégrer le développement durable dans une démarche de développement industriel</div>
+          </div>
+          <div class="comp-level">
+            <div class="level-dots">
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot"></div>
+              <div class="level-dot"></div>
+            </div>
+            <div class="level-text">En voie d'acquisition · 2/4</div>
+          </div>
+        </div>
+
+        <div class="comp-ess">
+          <span class="ess-tag">Stratégie d'entreprise</span>
+          <span class="ess-tag">Cycle de vie produit</span>
+          <span class="ess-tag">Impacts environnementaux</span>
+          <span class="ess-tag">Indicateurs quantifiables</span>
+          <span class="ess-tag">Valoriser la démarche</span>
+        </div>
+
+        <div class="comp-divider"></div>
+
+        <div class="preuve-block">
+          <div class="preuve-title">🏭 Étude de cas industrielle — Gestion du cycle de vie des instruments, CGR International</div>
+          <p class="preuve-text">
+            La gestion d'un parc métrologique est intrinsèquement une démarche de développement durable : <strong style="color:var(--text-main)">prolonger la durée de vie utile des instruments</strong> par un suivi rigoureux de l'étalonnage évite le remplacement prématuré et réduit les déchets d'équipements électroniques (DEEE).
+            <br><br>
+            J'ai eu à traiter un cas concret illustrant ce principe : un <strong style="color:var(--text-main)">pied à coulisse tombé</strong>, dont les becs extérieurs étaient endommagés. Plutôt que de le rebuter ou d'en commander un neuf, j'ai analysé les usages de cet instrument dans les différents postes : dans un poste ne mobilisant jamais les becs extérieurs, l'instrument était techniquement conforme à 100 % pour cet usage. J'ai effectué un <strong style="color:var(--text-main)">échange de postes</strong> entre les deux pieds à coulisse — aucun achat, zéro rebut, continuité de production assurée.
+          </p>
+        </div>
+
+        <div class="callout">
+          <div class="callout-label">📐 Prise de recul — Réflexion sur l'acquisition</div>
+          <p>
+            Cette démarche m'a appris que <strong>durabiliser, c'est avant tout raisonner avant d'agir</strong>. Le réflexe industriel habituel est le remplacement. Le réflexe durable, c'est de se demander : dans quel contexte cet instrument est-il encore conforme ?
+            <br><br>
+            Je n'ai pas encore conduit d'analyse formelle de cycle de vie (ACV) ni calculé des indicateurs environnementaux quantifiés — c'est la marge de progression que j'identifie clairement. Mais <strong>j'ai intégré la logique</strong> : avant de remplacer, évaluer. Avant de jeter, repositionner.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTEXTE & ALTERNANCE ═══════════════ -->
+<section id="context">
+  <div class="container">
+    <p class="section-label reveal">Contexte · Entreprise & Formation</p>
+    <h2 class="section-title reveal reveal-delay-1">Mon parcours</h2>
+    <p class="section-sub reveal reveal-delay-2">Alternance · CGR International · 2023 – 2026</p>
+
+    <div class="context-grid reveal reveal-delay-2">
+      <div>
+        <div class="info-block">
+          <div class="info-label">Entreprise d'accueil</div>
+          <div class="info-value"><strong>CGR International</strong> — Igé (61)</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Poste occupé</div>
+          <div class="info-value"><strong>Technicien Métrologue</strong></div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Tuteur industriel</div>
+          <div class="info-value"><strong>Thibault Clary</strong></div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Tuteur académique</div>
+          <div class="info-value"><strong>Jérôme Rangonio</strong> · IUT Alençon</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Formation</div>
+          <div class="info-value">BUT GMP · Parcours <strong>CPD</strong> · IUT d'Alençon</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="info-label" style="margin-bottom:16px;">Périodes en entreprise</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-period">Août → 5 Sept 2024</div>
+            <div class="tl-label">Immersion initiale — prise de poste</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-period">13 Oct → 31 Oct 2024</div>
+            <div class="tl-label">Gestion du parc — premières requalifications</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-period">8 Déc 2024 → 2 Jan 2025</div>
+            <div class="tl-label">Création fiches YIS — balances compteuses</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-period">9 Fév → 27 Fév 2025</div>
+            <div class="tl-label">Analyses Cpk — dossiers PPAP</div>
+          </div>
+          <div class="tl-item current">
+            <div class="tl-dot"></div>
+            <div class="tl-period">30 Mars → 31 Août 2025</div>
+            <div class="tl-label">Période longue — mission principale en cours</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-brand">Maxime Haon · Portfolio BUT3 GMP CPD · IUT Alençon · 2026</div>
+  <div class="footer-info">
+    Soutenance de fin de parcours<br>
+    SAE6.01 & PF6 · Évaluation des compétences
+  </div>
+</footer>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script>
+/* ─── Scroll reveal ─── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ─── Radar chart ─── */
+const DATA = {
+  etudes:  { vals: [3, 2, 3, 3, 3], label: 'Situation ÉTUDES' },
+  indus:   { vals: [2, 2, 1, 3, 3], label: 'Situation INDUSTRIALISATION' },
+  orga:    { vals: [3, 3, 2, 2, 1], label: 'Situation ORGANISATION' },
+  moy:     { vals: [2.67, 2.33, 2, 2.67, 2.33], label: 'Moyenne toutes situations' }
+};
+
+const LABELS = ['SPÉCIFIER','DÉVELOPPER','RÉALISER','EXPLOITER','INN./DUR.'];
+const COLORS = {
+  etudes: '#89c4e1',
+  indus:  '#e06b1f',
+  orga:   '#6a9e6a',
+  moy:    '#c07ae0'
+};
+
+let currentKey = 'etudes';
+let animFrame = null;
+let animProg = 1;
+
+function drawRadar(key, progress = 1) {
+  const canvas = document.getElementById('radar');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2;
+  const R = Math.min(W, H) * 0.38;
+  const n = LABELS.length;
+  const color = COLORS[key];
+  const vals = DATA[key].vals;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid rings
+  for (let r = 1; r <= 4; r++) {
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+      const x = cx + Math.cos(angle) * R * r / 4;
+      const y = cy + Math.sin(angle) * R * r / 4;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = r === 4 ? 'rgba(78,127,165,0.25)' : 'rgba(78,127,165,0.1)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Axes
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.cos(angle) * R, cy + Math.sin(angle) * R);
+    ctx.strokeStyle = 'rgba(78,127,165,0.15)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Data polygon
+  ctx.beginPath();
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const v = vals[i] * progress;
+    const x = cx + Math.cos(angle) * R * v / 4;
+    const y = cy + Math.sin(angle) * R * v / 4;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  const hex = color;
+  ctx.fillStyle = hex + '22';
+  ctx.fill();
+  ctx.strokeStyle = hex;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Points
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const v = vals[i] * progress;
+    const x = cx + Math.cos(angle) * R * v / 4;
+    const y = cy + Math.sin(angle) * R * v / 4;
+    ctx.beginPath();
+    ctx.arc(x, y, 4, 0, Math.PI*2);
+    ctx.fillStyle = hex;
+    ctx.fill();
+  }
+
+  // Labels
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const x = cx + Math.cos(angle) * (R + 28);
+    const y = cy + Math.sin(angle) * (R + 28);
+    ctx.font = '500 11px "Barlow Condensed", sans-serif';
+    ctx.fillStyle = '#7a95aa';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.letterSpacing = '0.1em';
+    ctx.fillText(LABELS[i], x, y);
+  }
+
+  // Center label
+  ctx.font = '400 10px "Barlow Condensed", sans-serif';
+  ctx.fillStyle = '#3d5468';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(DATA[key].label, cx, cy + R + 60);
+}
+
+function animateRadar(key) {
+  if (animFrame) cancelAnimationFrame(animFrame);
+  const start = performance.now();
+  const dur = 500;
+  function step(now) {
+    const t = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    drawRadar(key, ease);
+    if (t < 1) animFrame = requestAnimationFrame(step);
+  }
+  animFrame = requestAnimationFrame(step);
+}
+
+function updateBars(key) {
+  const d = DATA[key].vals;
+  const ids = ['specifier','developper','realiser','exploiter','innover'];
+  const colors = ['var(--accent-bhi)','var(--accent-o)','#e0b01f','#6a9e6a','#9e6aaa'];
+  ids.forEach((id, i) => {
+    const el = document.getElementById('bars-' + id);
+    if (!el) return;
+    const val = Math.round(d[i]);
+    el.innerHTML = [1,2,3,4].map(j =>
+      `<div class="legend-bar ${j <= val ? 'filled' : ''}" style="${j <= val ? 'background:' + colors[i] : ''}"></div>`
+    ).join('');
+  });
+}
+
+function switchRadar(key, btn) {
+  document.querySelectorAll('.sit-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentKey = key;
+  animateRadar(key);
+  updateBars(key);
+}
+
+// Init
+animateRadar('etudes');
+updateBars('etudes');
+</script>
+
+</body>
+</html>
