@@ -12,30 +12,35 @@
   /* ═══════════════════════════════════════════
      VARIABLES & RESET
   ═══════════════════════════════════════════ */
-  :root {
-  --base:       #0a0510;
-  --surf-1:     #130b1c;
-  --surf-2:     #1e132c;
-  --surf-3:     #2d1c42;
-  --border:     #2d1c42;
-  --border-hi:  #4a3068;
-  --text-main:  #f0e6ff;
-  --text-sec:   #a78bfa;
-  --text-dim:   #6d5b8c;
-  
-  /* Cyan & Magenta accents */
-  --accent-b:   #00f0ff;
-  --accent-bhi: #70ffff;
-  --accent-o:   #ff0055;
-  --accent-ohi: #ff5588;
+ :root {
+    /* Fonds réhaussés (moins noirs, plus gris-bleu foncé) */
+    --base:       #151b23; 
+    --surf-1:     #1a222e;
+    --surf-2:     #222d3e;
+    --surf-3:     #2b3c52;
+    --border:     #2b3c52;
+    --border-hi:  #384f6b;
 
-  --font-cond:  'Barlow Condensed', sans-serif;
-  --font-body:  'Barlow', sans-serif;
+    /* Textes légèrement éclaircis pour garder un bon contraste avec le nouveau fond */
+    --text-main:  #f0f6fa;
+    --text-sec:   #8ba7bc;
+    --text-dim:   #4d667c;
 
-  --grid-color: rgba(167, 139, 250, 0.05);
-  --radius:     4px;
-  --transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
+    /* Accents d'origine (inchangés pour garder votre identité) */
+    --accent-b:   #4a7fa5;
+    --accent-bhi: #89c4e1;
+    --accent-o:   #e06b1f;
+    --accent-ohi: #f0884a;
+
+    /* Typographie et variables d'origine (inchangées) */
+    --font-cond:  'Barlow Condensed', sans-serif;
+    --font-body:  'Barlow', sans-serif;
+
+    /* Grille très légèrement plus visible pour ne pas disparaître sur le fond plus clair */
+    --grid-color: rgba(78, 127, 165, 0.06);
+    --radius:     4px;
+    --transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
   /* ═══════════════════════════════════════════
      NAVBAR
   ═══════════════════════════════════════════ */
